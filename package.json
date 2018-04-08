@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "mobx-react": "^5.0.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "spectre.css": "^0.5.1"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/style.scss -o dist/style.css",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/style.scss -o dist/style.css --watch --recursive",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "^1.2.2"
   }
 }
