@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import { Provider } from 'mobx-react';
 import logo from './logo.svg';
 import './dist/index.css';
 import './App.css';
 import Search from './Search';
+import UserList from './Search/UserList';
+import User from './Search/User';
 
 class App extends Component {
   render() {
-    const data = [
-      { id: 1, name: 'Thor Odinson', comment: 'Earth\'s Mightiest Heroes joined forces to take on threats...' },
-      { id: 2, name: 'Bruce Banner', comment: 'The Strategic Homeland Intervention, Enforcement, and Logistics Division...' },
-      { id: 3, name: 'Tony Stark', comment: 'Wow' },
-      { id: 4, name: 'Steve Rogers', comment: '...' },
-      { id: 5, name: 'Natasha Romanoff', comment: '' }
-    ];
+    const stores = {
+      userList: new UserList()
+    };
+    stores.userList.users.push(
+      new User({ name: 'John Smith', age: 22, isOnline: false }),
+      new User({ name: 'Thomas Monson', age: 55, isOnline: true })
+    );
     return (
       <div className="App">
         <header className="App-header">
@@ -22,7 +25,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Search data={data} />
+        <Provider {...stores}>
+          <Search />
+        </Provider>
       </div>
     );
   }

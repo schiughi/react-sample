@@ -1,34 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { inject, observer } from 'mobx-react';
 
 import SearchForm from './SearchForm';
 import SearchResult from './SearchResult';
 
+@inject('userList')
+@observer
 export default class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: props.data
-    };
-  }
-
   onFliter = (value) => {
-    const line = this.props.data.filter((item) => (
-      item.name.toLowerCase().indexOf(value) >= 0
-    ));
-    this.setState({
-      data: line
-    });
+    this.props.userList.inputeCondition(value);
   };
   render() {
     return (
       <div>
         <SearchForm onFilter={this.onFliter.bind(this)} />
-        <SearchResult data={this.state.data} />
+        <SearchResult users={this.props.userList.filteredUsers} />
       </div>
     );
   }
 }
-Search.propTypes = {
-  data: PropTypes.array.isRequired
-};
+;

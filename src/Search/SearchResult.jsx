@@ -4,8 +4,8 @@ import ListItem from './ListItem';
 
 export default class SearchResult extends Component {
   render() {
-    const list = this.props.data.map((data) => (
-      <ListItem user={data} key={data.id} />
+    const list = this.props.users.map((user) => (
+      <ListItem user={user} key={user.id} />
     ));
 
     return (
@@ -17,5 +17,5 @@ export default class SearchResult extends Component {
 }
 
 SearchResult.propTypes = {
-  data: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired
 };

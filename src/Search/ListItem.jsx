@@ -20,5 +20,9 @@ export default class ListItem extends Component {
 }
 
 ListItem.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired
+  }).isRequired
 };
